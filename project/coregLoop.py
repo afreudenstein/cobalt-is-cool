@@ -364,7 +364,7 @@ andeanOutSamp.close()
 filename = '../Week10/EarthChemCO.txt'
 
 #Data read-in
-sampleData=numpy.loadtxt(filename, delimiter=',')
+chemdata=numpy.loadtxt(filename, delimiter=',')
 
 #Clean latlongs
 #Longs
