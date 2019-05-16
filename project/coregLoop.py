@@ -72,8 +72,8 @@ def coregLoop(pointlist,ages,plateIDs):
     #Loop over all the samples, coregistering each one.
     for i, currentPoint in enumerate(pointlist):
 
-        lat=currentPoint[1]
-        lon=currentPoint[0]
+        lat=currentPoint[0]
+        lon=currentPoint[1]
         age=ages[i]
         plateID=int(plateIDs[i])
         
@@ -364,17 +364,22 @@ andeanOutSamp.close()
 filename = '../Week10/EarthChemCO.txt'
 
 #Data read-in
-chemdata=numpy.loadtxt(filename, delimiter=',')
+data=numpy.loadtxt(filename, delimiter=',')
 
 #Clean latlongs
+#setting South America-specific map
+#Lat: +15 to -60  Long: -90 to -25
+#Restriction method adapted from method to remove outliers in Intro_Python_Geo
+
 #Longs
-where_longitude_above_min = chemdata[:,1]>-180
-cudata=chemdata[where_longitude_above_min]
-where_longitude_below_max = cudata[:,1]<180
-cudata2=cudata[where_longitude_below_max]
+where_longitude_above_min = data[:,1]>-90
+data1=data[where_longitude_above_min]
+where_longitude_below_max = data1[:,1]<-25
+data2=data1[where_longitude_below_max]
+
 #Lats
-cudata3=cudata2[cudata2[:,0]<90]
-sampleData=cudata3[cudata3[:,0]>-90]
+data3=data2[data2[:,0]<15]
+sampleData=data3[data3[:,0]>-60]
 
 
 # In[16]:
