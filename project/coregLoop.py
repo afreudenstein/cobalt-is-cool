@@ -360,11 +360,21 @@ andeanOutSamp.close()
 #print andeanPoints
 #[recs,shapes,fields,Nshp]=readTopologyPlatepolygonFile(andeanPoints)
 
-#Load file
+#EDIT afre Load file
 filename = '../Week10/EarthChemCO.txt'
 
 #Data read-in
 sampleData=numpy.loadtxt(filename, delimiter=',')
+
+#Clean latlongs
+#Longs
+where_longitude_above_min = chemdata[:,1]>-180
+cudata=chemdata[where_longitude_above_min]
+where_longitude_below_max = cudata[:,1]<180
+cudata2=cudata[where_longitude_below_max]
+#Lats
+cudata3=cudata2[cudata2[:,0]<90]
+sampleData=cudata3[cudata3[:,0]>-90]
 
 
 # In[16]:
